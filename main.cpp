@@ -54,6 +54,26 @@ class WordFrequencyManager {
                 word_freq[word] = 1;
             }
         }
+
+        // sorted/0: return vector string of words stored in word_freq, from most to less frequent.
+        vector<pair<string, int>> sorted(){
+            //sortedWordFreq é o array que iremos retornar.
+            vector<pair<string, int>> sortedWordFreq;
+            //colocamos as keys e as values como pares no sortedWordFreq
+            for(const auto &[key, value]: word_freq){
+                sortedWordFreq.push_back({key, value});
+            }
+            //Fazemos um sort nesse sortedWordFreq com base na qntdade de vezes que a palavra já apareceu.
+            sort(
+                sortedWordFreq.begin(), 
+                sortedWordFreq.end(), 
+                [](const pair<string, int> &a, const pair<string, int> &b
+                ){   
+                return a.second > b.second;
+            });
+            //e, por fim, retornamos.
+            return sortedWordFreq;
+        }
         
         map<string, int> getWordFreq() {return word_freq;};
 };
